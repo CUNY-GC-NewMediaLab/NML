@@ -30,9 +30,7 @@ Template Name: People Root Page
 					</ul>
 				</div>
 				<div class="projectborder">
-					<h2 class="entry-title">
-						Co-Directors
-					</h2>
+					<h2 class="entry-title">Co-Directors</h2>
 <ul class="people">
 <?php wp_list_pages("depth=1&title_li=&sort_column=menu_order&child_of=509"); // display the sub pages of the current page only ?>
 </ul>
@@ -45,14 +43,14 @@ Template Name: People Root Page
 <?php 
   $pages = get_pages('echo=0&depth=1&title_li=&sort_column=menu_order&child_of=515'); 
   foreach ( $pages as $page ) {
+  	// if there is a taxonomy-level department, use that -- if not, use the custom field
   		$stdepartmentTaxo = wp_get_object_terms($page->ID, 'departments');
 		if(!empty($stdepartmentTaxo)){
   			if(!is_wp_error( $stdepartmentTaxo )){
    				$myDept =  $stdepartmentTaxo[0] ->name ;
   			}
 		} 
-////get_post_meta($theid, 'stdepartment', false);
-			$x =  get_post_meta($page->ID, 'stdepartment', false);
+		$x =  get_post_meta($page->ID, 'stdepartment', false);
 		$dept = (isset($myDept)) ? $myDept : 'x ' . $x[0];
 		$option = '<li data-department = "' . $dept . '" >';
   		$option .= '<a href="' . get_page_link( $page->ID ) . '">';
