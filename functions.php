@@ -514,5 +514,80 @@ wp_enqueue_script('jq', $themedir . '/js/jquery.min.js');
 wp_enqueue_script('jq-mix', $themedir . '/js/jquery.mixitup.min.js');
 wp_enqueue_script('responnav', $themedir . '/js/tinynav.min.js');
 
-// Remember: the Sandbox is for play.
+// LMH define custom taxonomy
+
+function departments_init() {
+	// create a new taxonomy
+	$labels = array(
+		'name'              => _x( 'Departments', 'taxonomy general name' ),
+		'singular_name'     => _x( 'Department', 'taxonomy singular name' ),
+		'popular_items'              => __( 'Popular Departments' ),
+		'search_items'      => __( 'Search Departments' ),
+		'all_items'         => __( 'All Departments' ),
+		'parent_item'       => __( 'Parent Department' ),
+		'parent_item_colon' => __( 'Parent Department:' ),
+		'edit_item'         => __( 'Edit Department' ),
+		'update_item'       => __( 'Update Department' ),
+		'add_new_item'      => __( 'Add New Department' ),
+		'new_item_name'     => __( 'New Department Name' ),
+		'menu_name'         => __( 'Department' ),
+	);
+
+	register_taxonomy(
+		'departments',
+		'page',
+		array(
+			'labels'                => $labels,
+			'rewrite' => array( 'slug' => 'department' ),
+			'hierarchical' => false,
+        'show_ui' => true,
+        'required' => true,
+        // LMH single value parameter depends on activation of plugin http://wordpress.org/plugins/single-value-taxonomy-ui/
+        'single_value' => true
+			
+		)
+	);
+}
+add_action( 'init', 'departments_init' );
+
+////
+
+class fancy_walker extends Walker_page {
+    function start_el(&$output, $page, $depth, $args, $current_page) {
+        if ( $depth )
+            $indent = str_repeat("\t", $depth);
+        else
+            $indent = '';
+ 
+        extract($args, EXTR_SKIP);
+        $css_class = array('lmhpage_item', 'page-item-'.$page->ID);
+        if ( !empty($current_page) ) {
+            $_current_page = get_page( $current_page );
+            _get_post_ancestors($_current_page);
+            if ( isset($_current_page->ancestors) && in_array($page->ID, (array) $_current_page->ancestors) )
+                $css_class[] = 'current_page_ancestor';
+            if ( $page->ID == $current_page )
+                $css_class[] = 'current_page_item';
+            elseif ( $_current_page && $page->ID == $_current_page->post_parent )
+                $css_class[] = 'current_page_parent';
+        } elseif ( $page->ID == get_option('page_for_posts') ) {
+            $css_class[] = 'current_page_parent';
+        }
+ 
+        $css_class = implode( ' ', apply_filters( 'page_css_class', $css_class, $page, $depth, $args, $current_page ) );
+ 
+        $output .= $indent . '<li class="' . $css_class . '"><a href="' . get_permalink($page->ID) . '">' . $link_before . apply_filters( 'the_title', '' ) . $link_after . get_the_post_thumbnail($page->ID, array(72,72)) .'</a>';
+ 
+        if ( !empty($show_date) ) {
+            if ( 'modified' == $show_date )
+                $time = $page->post_modified;
+            else
+                $time = $page->post_date;
+ 
+            $output .= " " . mysql2date($date_format, $time);
+        }
+    }
+}
+
+
 ?>

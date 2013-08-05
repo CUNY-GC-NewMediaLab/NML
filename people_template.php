@@ -22,31 +22,46 @@ $startdate		=	get_post_meta($theid, 'people-datestarted', false);
 $studentname	=	get_post_meta($theid, 'studentname ', false);
 $studentnameurl	=	get_post_meta($theid, 'studentnameurl', false);
 $email	=	get_post_meta($theid, 'people-email', false);
-$department 	=	get_post_meta($theid, 'department', false);
+//$department 	=	get_post_meta($theid, 'department', false);
+//$department2 	= the_terms( $theid, 'Department', 'departments: ', ' / ' );
+
+
 $studentfaculty	=	get_post_meta($theid, 'studentfaculty', false);
 //information on project
 $pprojectname	=	get_post_meta($theid, 'people-projectitle', false);
 $pprojecturl	=	get_post_meta($theid, 'people-projectlink', false);
-$stdepartment	=	get_post_meta($theid, 'stdepartment', false);
+//$stdepartment	=	get_post_meta($theid, 'stdepartment', false);
 
 //optional fields
 $linkedin		=	get_post_meta($theid, 'people-linkedin', false);
 $twitter		=	get_post_meta($theid, 'people-twitter', false);
 $commons 	=	get_post_meta($theid, 'people-commons', false);
-?>
-<?php
+///
+///
 $projectname	=	get_post_meta($theid, 'title of outside project link', false);
 $projecturl	=	get_post_meta($theid, 'offsite main project url', false);
+
+ $stdepartmentTaxo = wp_get_object_terms($post->ID, 'departments');
+if(!empty($stdepartmentTaxo)){
+  if(!is_wp_error( $stdepartmentTaxo )){
+   	$myDept =  $stdepartmentTaxo[0] ->name ;
+  //  foreach($product_terms as $term){
+    	//echo '<a href="'.get_term_link($term->slug, 'departments').'">'.$term->name.'</a>'; 
+   // }
+ 
+  }
+}
+
 ?>
 
 
 <h2 class="entry-title">
 	<?php the_title() ?>
     <span style="font-weight: lighter; color: #999; size: 85%; text-transform: capitalize;">		
- 	<?php if($stdepartment[0]){ echo " / ". $stdepartment[0] ."";	}		?>   
+ 	<?php  if($myDept){  echo " / ". $myDept ."\n";	}		?>   
     </span>
-</h2>
-	
+</h2> 
+
 <div class="entry-content">
   <?php if($studentfaculty[0]){ echo "". $studentfaculty[0] ."";	}
   ?>

@@ -38,9 +38,32 @@ Template Name: People Root Page
 </ul>
 				</div>
 				<div class="projectborder">
-					<h2 class="entry-title">
-						Graduate Students and Faculty
-					</h2>
+					<h2 class="entry-title">Graduate Students and Faculty</h2>
+<ul>
+
+
+<?php 
+  $pages = get_pages('echo=0&depth=1&title_li=&sort_column=menu_order&child_of=515'); 
+  foreach ( $pages as $page ) {
+  		$stdepartmentTaxo = wp_get_object_terms($page->ID, 'departments');
+		if(!empty($stdepartmentTaxo)){
+  			if(!is_wp_error( $stdepartmentTaxo )){
+   				$myDept =  $stdepartmentTaxo[0] ->name ;
+  			}
+		} 
+////get_post_meta($theid, 'stdepartment', false);
+			$x =  get_post_meta($page->ID, 'stdepartment', false);
+		$dept = (isset($myDept)) ? $myDept : 'x ' . $x[0];
+		$option = '<li data-department = "' . $dept . '" >';
+  		$option .= '<a href="' . get_page_link( $page->ID ) . '">';
+		$option .= $page->post_title;
+		$option .= '</a></li>';
+		unset($myDept);
+		echo $option;
+  	}
+ ?>
+ </ul>
+<hr >
 
 				<?php
 					$page_s = explode("</li>",wp_list_pages('echo=0&depth=1&title_li=&sort_column=menu_order&child_of=515'));
@@ -55,6 +78,19 @@ Template Name: People Root Page
 					}
 				?>
 					<ul class="left people">
+						<?php
+						 $stdepartmentTaxo = wp_get_object_terms($post->ID, 'departments');
+if(!empty($stdepartmentTaxo)){
+  if(!is_wp_error( $stdepartmentTaxo )){
+   	$myDept =  $stdepartmentTaxo[0] ->name ;
+  //  foreach($product_terms as $term){
+    	//echo '<a href="'.get_term_link($term->slug, 'departments').'">'.$term->name.'</a>'; 
+   // }
+ 
+  }
+}
+
+?>
 <?php echo $page_left; ?>
 					</ul>
 					<ul class="right people">
@@ -66,7 +102,7 @@ Template Name: People Root Page
 						Visiting Researchers
 					</h2>
 					<ul class="people">
-					<?php wp_list_pages("depth=1&title_li=&sort_column=menu_order&child_of=2000"); // display the sub pages of the current page only ?>
+					<?php wp_list_pages('depth=1&title_li=&sort_column=menu_order&child_of=2000&link_before=<span>' . __('Poetry') . '</span>'); // display the sub pages of the current page only ?>
 					</ul>
 				</div>
 				<div class="projectborder">
