@@ -1,0 +1,282 @@
+/* @override 
+	http://lw4.gc.cuny.edu/_dev_nml/wp-content/themes/NMLResponsiveV2013/css/nml.css?ver=3.3.2 */
+
+/* styles for desktop */
+.tinynav {height: 37px; display: none; width: 50%; color: #AF0A0A ; font: 135%/195% 'AlternateGothic2BTRegular', 'Impact', 'Franklin Gothic Medium',  'Futura', 'Arial Narrow', 'Helvetica', 'Optima', 'Tahoma', 'Trebuchet MS' ,sans-serif; background: #FFF;}
+
+/* styles for mobile */
+@media screen and (max-width: 600px) {
+    .tinynav { display: block; margin-left: 5em;}
+    #menu-primary-nav{display: none}
+    #topnavigation ul {background: transparent; border-bottom: 0px;}
+    #topnavigation {margin: 0 0 0 21.56%;}
+}
+
+li.current_page_item a  { color: #b00!important;}
+.networking_badge img {vertical-align: middle; padding: 3px;}
+.meta_section {padding: 0 0 1em 0}
+.bubbleInfo {
+    position: relative;
+}
+
+div.currentprojectdesc {position: absolute; top: 0em; right: 10em;}
+.popup {
+
+    position: absolute;
+    display: none; /* keeps the popup hidden if no JS available */
+}
+@font-face {
+    font-family: 'AlternateGothic2BTRegular';
+    src: url('../fonts/alternate_gothic_no.2_bt-webfont.eot');
+    src: url('../fonts/alternate_gothic_no.2_bt-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/alternate_gothic_no.2_bt-webfont.woff') format('woff'),
+         url('../fonts/alternate_gothic_no.2_bt-webfont.ttf') format('truetype'),
+         url('../fonts/alternate_gothic_no.2_bt-webfont.svg#AlternateGothic2BTRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+a {color: #5f5f5f;}
+a:hover {color: #900;}
+
+body {
+  	font: normal normal .75em/1.5em "trebuchet ms", sans-serif;;
+	background: #ffffff url(../images/new-nml-bg.gif) no-repeat;
+	color: #3f3f3f;
+	margin: 0px 0px 20px 0px;
+	max-width: 85em;/* 75% of 1em sizing (85*16) 1020px min*/
+}
+
+button.names {border:0; background: 0;
+	font-family: "trebuchet ms", sans-serif;
+	color: #5f5f5f;}
+
+/* new styles for NML version 2.0 */
+#topnavigation {font-family: 'AlternateGothic2BTRegular', 'Impact', 'Franklin Gothic Medium',  'Futura', 'Arial Narrow', 'Helvetica', 'Optima', 'Tahoma', 'Trebuchet MS' ,sans-serif; margin: 33px 0 0 21.56%;}
+
+#topnavigation ul {
+	font-size: 125%;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	list-style: none;
+	color: #777;
+	margin: 0;
+	padding: 0;
+}
+#topnavigation ul li {
+	margin-right: 2.75%;
+	padding: 0;
+	float: left;
+}
+#topnavigation  a { 	
+	z-index: 10;
+	text-decoration: none;
+	color: #777;
+	padding: 0 2px 0 1px;
+	background: white;}
+	
+#topnavigation  a:hover { 
+color: #000;
+text-decoration: none;
+}
+/* end new style ............... */
+
+
+
+/* people page  */
+div.entry-content.peoplepage h2 {
+	clear: both;
+}
+div.entry-content.peoplepage ul {
+	
+	padding	: 10px 0 15px 15px;
+	}
+div.entry-content.peoplepage ul.left {
+	width:  45%;
+	float: left;
+	min-width: 100px;
+}
+
+div.entry-content.peoplepage ul.right {
+	width:  45%;
+	float: left;
+		
+	}
+
+div.projectborder {padding: 1em 0 1em 0;}
+h1, h2, h3 {
+	color: #AF0A0A;
+	font-family: arial, sans-serif;
+	border-bottom: 1px solid #cccccc;
+	text-transform: uppercase;
+	font-weight: bold;
+	padding: 0px;
+	margin-top: 0px;
+	letter-spacing: 1px;
+}
+
+h2 {font-size: 115%;}
+h1 {font-size: 130%;}
+h3 {font-size: 100%;}
+
+
+h2 span#explain_rollovers {
+	font-size: 9px; 
+	color: #b4b4b4;
+	text-transform: lowercase;
+	letter-spacing: 0px;
+}
+ul {
+	list-style-type: disc;
+}
+li {
+	padding: 0 0 3px 0;
+}
+.alignright,img.alignright{
+float:right;
+margin:.25 0 1em 1em;
+}
+
+.alignleft,img.alignleft{
+float:left;
+margin:.25em 1em 1em 0em;
+}
+
+.aligncenter,img.aligncenter{
+display:block;
+margin:1em auto;
+text-align:center;
+}
+div#footer {padding: 3.5em; text-align:center; color: #aaa;}
+div#footer img {vertical-align: text-bottom; border: 0; padding: 0 2px 0 2px;}
+hr#mac_ie_bug {
+	clear: both; 
+	visibility: hidden;
+	margin: 0;
+	padding: 0;
+	height: 1px;
+}
+
+/* menu items */
+#menu {
+	margin: 33px 0 0 220px;
+}
+div#flash_decoration {
+	margin: 0 0 0 54px;
+
+}
+#menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#menu ul li {
+	margin-right: 60px;
+	float: left;
+	padding: 0;
+}
+#nav_list img {
+	border: 0;
+}
+#nav_list a {
+	border: 0;
+}
+#nav_list a#current_link {
+	color: #686666;
+	background-color: white;
+	position: relative;
+	top: 15px;
+}
+
+/* content stuff */
+#content {
+	
+	clear: both;
+	margin: 0 0 0 220px;
+	padding: 30px 0 0 0;
+}
+div#content ul{
+	margin-top: 0;
+}
+div#content p{
+	padding: 0 50px 0 0;
+}
+div#content p#intro{
+	padding: 0 50px 0 0;
+	margin: 0;
+}
+span#student_instructions {
+	width: 200px;
+	position: relative;
+	left: 5em;
+
+
+}
+
+.studname {clear: left;}
+/* projects page */
+span.column_1 {
+	float: left;
+}
+span.column_2 {
+	float: left;
+	margin-left: 75px;
+}
+div.project_links {
+	width: 250px;
+	float: left;
+	display: inline;
+}
+div.project_links ul{
+	margin-top: 0;
+}
+div.hide {
+	display: none;
+}
+div.show {
+	padding: 6px 6px 10px 7px;
+	border: 1px solid #d5d5d5;
+	color: #AF0A0A;
+}
+img.picon {
+	margin: 0 10px 5px 0;
+	float: left;
+}
+.vcard {
+	font-style: italic;
+	}
+	
+.sidebar {width: 200px; position: absolute; left: 700px; top: 68px;}
+#blogcontent {width: 67.5%; 
+	clear: both;
+	margin: 0 0 0 21.56%;
+	padding: 30px 0 0 0;}
+	
+.post {padding: 17px 0 17px 0; border-bottom: 1px solid #AF0A0A;}
+.comments, #respond {padding: 15px 0 15px 0;}
+.nav-previous, .nav-next {font-size: 80%;}
+.nav-previous a, .nav-next a {color: #aaa;}
+.widget {padding: 7px 0 7px 0;}
+
+
+/* tooltip styling. by default the element to be styled is .tooltip  */
+.tooltip {
+	display:none;
+	background:transparent url(/tools/img/tooltip/black_arrow.png);
+	font-size:12px;
+	height:70px;
+	width:160px;
+	padding:25px;
+	color:#fff;	
+	background: #eee;
+}
+ 
+/* style the trigger elements */
+#dyna img {
+	border:0;
+	cursor:pointer;
+	margin:0 8px;
+}
+
+p.wp-caption-text {font: 75%/85%; color: #aaa; margin-top: 2px; font-style: italic; }
+
