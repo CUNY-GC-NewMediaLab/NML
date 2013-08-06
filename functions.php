@@ -511,9 +511,9 @@ $themedir = get_template_directory_uri();
 wp_enqueue_style('nml', $themedir . '/css/nml.css');
 //wp_enqueue_script('rollovers', $themedir . '/js/jq.js');
 wp_enqueue_script('jq', $themedir . '/js/jquery.min.js', '1.6');
-wp_enqueue_script('jq-mix', $themedir . '/js/jquery.mixitup.min.js', array('jq'), '1.6');
+wp_enqueue_script('jq-tinysort', $themedir . '/js/jquery.tinysort.min.js', array('jq'), '1.6');
 wp_enqueue_script('responnav', $themedir . '/js/tinynav.min.js');
-wp_enqueue_script('nml', $themedir . '/js/nml.js', array('jq','jq-mix'), '1.5', true);
+wp_enqueue_script('nml', $themedir . '/js/nml.js', array('jq','jq-tinysort'), '1.5', true);
 
 // LMH define custom taxonomy
 function departments_init() {
@@ -521,7 +521,7 @@ function departments_init() {
 	$labels = array(
 		'name'              => _x( 'Departments', 'taxonomy general name' ),
 		'singular_name'     => _x( 'Department', 'taxonomy singular name' ),
-		'popular_items'              => __( 'Popular Departments' ),
+		'popular_items'     => __( 'Popular Departments' ),
 		'search_items'      => __( 'Search Departments' ),
 		'all_items'         => __( 'All Departments' ),
 		'parent_item'       => __( 'Parent Department' ),

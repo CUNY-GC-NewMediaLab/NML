@@ -38,32 +38,17 @@ Template Name: People Root Page
 				<div class="projectborder">
 					<h2 class="entry-title">Graduate Students and Faculty</h2>
 				
-<?php
-$args = array( 'taxonomy' => 'departments' );
+<ul class="sortbyOptions">
+	<li id="byDept1" class="sort" data-sort="data-department" data-order="desc">Department</li>
+	<li id="byAlpha1" class="sort active" data-sort="default" data-order="desc">Default</li>
+</ul>
 
-$terms = get_terms( 'departments', $args );
-// controls for mix it up plugins
-$count = count( $terms ); $i=0;
-if ( $count > 0 ) {
-	$term_list = '<ul>';
-	foreach ( $terms as $term ) {
-		//$i++;
-		//$term_list .= '<li class="sort" data-sort="data-department">';
-		//$term_list .=  $term->name ;
-		//$term_list .= '</li>';
-	}
-	$term_list .= '<li class="sort" data-sort="data-department" data-order="desc">Department</li>';
-	$term_list .= '<li class="sort active" data-sort="default" data-order="desc">Default</li>';
-	echo $term_list . '</ul>';
-}
-?>
-<hr>
-<ul id = "Grid">
+<ul id = "peopleList1">
 <?php
 $pages = get_pages( 'echo=0&depth=1&title_li=&sort_column=menu_order&child_of=515' );
 $oldD = '';
 foreach ( $pages as $page ) {
-	// if there is a taxonomy-level department, use that -- if not, use the custom field
+	// taxonomy-level department
 	$stdepartmentTaxo = wp_get_object_terms( $page->ID, 'departments' );
 
 	if ( !empty( $stdepartmentTaxo ) ) {
@@ -72,12 +57,11 @@ foreach ( $pages as $page ) {
 		}
 	}
 	$option = '';
-	//$x =  get_post_meta( $page->ID, 'stdepartment', false );
 	$dept = ( isset( $myDept ) ) ? $myDept : 'Cryptozoology';
 	if ($oldD != $dept) {
-		$option .= "<li style='display:block'> $dept </li>";
+		$option .= "<li class='headerLi' style='display:block' data-department ='" .  $dept   . "'><span>$dept</span></li>";
 	}
-	$option .= '<li class="mix" data-department = "' . $dept . '" >';
+	$option .= '<li  data-department = "' . $dept . '" >';
 	$option .= '<a href="' . get_page_link( $page->ID ) . '">';
 	$option .= $page->post_title;
 	$option .= '</a></li>';
