@@ -280,3 +280,10 @@ img.picon {
 
 p.wp-caption-text {font: 75%/85%; color: #aaa; margin-top: 2px; font-style: italic; }
 
+/*  */
+ul#Grid .mix{
+	background-color: yellow;
+   /* opacity: 0;
+    display: none;*/
+}
+

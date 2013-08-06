@@ -18,7 +18,7 @@ Template Name: People Root Page
 						Managing Director
 					</h2>
 					<ul class="people">
-<?php wp_list_pages("depth=1&title_li=&sort_column=menu_order&child_of=507"); // display the sub pages of the current page only ?>
+<?php wp_list_pages( "depth=1&title_li=&sort_column=menu_order&child_of=507" ); // display the sub pages of the current page only ?>
 					</ul>
 				</div>
 				<div class="projectborder">
@@ -26,69 +26,82 @@ Template Name: People Root Page
 						Project Advisors
 					</h2>
 					<ul class="people">
-<?php wp_list_pages("depth=1&title_li=&sort_column=menu_order&child_of=513"); // display the sub pages of the current page only ?>
+<?php wp_list_pages( "depth=1&title_li=&sort_column=menu_order&child_of=513" ); // display the sub pages of the current page only ?>
 					</ul>
 				</div>
 				<div class="projectborder">
 					<h2 class="entry-title">Co-Directors</h2>
 <ul class="people">
-<?php wp_list_pages("depth=1&title_li=&sort_column=menu_order&child_of=509"); // display the sub pages of the current page only ?>
+<?php wp_list_pages( "depth=1&title_li=&sort_column=menu_order&child_of=509" ); // display the sub pages of the current page only ?>
 </ul>
 				</div>
 				<div class="projectborder">
 					<h2 class="entry-title">Graduate Students and Faculty</h2>
-<ul>
+				
+<?php
+$args = array( 'taxonomy' => 'departments' );
 
+$terms = get_terms( 'departments', $args );
+// controls for mix it up plugins
+$count = count( $terms ); $i=0;
+if ( $count > 0 ) {
+	$term_list = '<ul>';
+	foreach ( $terms as $term ) {
+		//$i++;
+		//$term_list .= '<li class="sort" data-sort="data-department">';
+		//$term_list .=  $term->name ;
+		//$term_list .= '</li>';
+	}
+	$term_list .= '<li class="sort" data-sort="data-department" data-order="desc">Department</li>';
+	$term_list .= '<li class="sort active" data-sort="default" data-order="desc">Default</li>';
+	echo $term_list . '</ul>';
+}
+?>
+<hr>
+<ul id = "Grid">
+<?php
+$pages = get_pages( 'echo=0&depth=1&title_li=&sort_column=menu_order&child_of=515' );
+$oldD = '';
+foreach ( $pages as $page ) {
+	// if there is a taxonomy-level department, use that -- if not, use the custom field
+	$stdepartmentTaxo = wp_get_object_terms( $page->ID, 'departments' );
 
-<?php 
-  $pages = get_pages('echo=0&depth=1&title_li=&sort_column=menu_order&child_of=515'); 
-  foreach ( $pages as $page ) {
-  	// if there is a taxonomy-level department, use that -- if not, use the custom field
-  		$stdepartmentTaxo = wp_get_object_terms($page->ID, 'departments');
-		if(!empty($stdepartmentTaxo)){
-  			if(!is_wp_error( $stdepartmentTaxo )){
-   				$myDept =  $stdepartmentTaxo[0] ->name ;
-  			}
-		} 
-		$x =  get_post_meta($page->ID, 'stdepartment', false);
-		$dept = (isset($myDept)) ? $myDept : 'x ' . $x[0];
-		$option = '<li data-department = "' . $dept . '" >';
-  		$option .= '<a href="' . get_page_link( $page->ID ) . '">';
-		$option .= $page->post_title;
-		$option .= '</a></li>';
-		unset($myDept);
-		echo $option;
-  	}
- ?>
+	if ( !empty( $stdepartmentTaxo ) ) {
+		if ( !is_wp_error( $stdepartmentTaxo ) ) {
+			$myDept =  $stdepartmentTaxo[0] ->name ;
+		}
+	}
+	$option = '';
+	//$x =  get_post_meta( $page->ID, 'stdepartment', false );
+	$dept = ( isset( $myDept ) ) ? $myDept : 'Cryptozoology';
+	if ($oldD != $dept) {
+		$option .= "<li style='display:block'> $dept </li>";
+	}
+	$option .= '<li class="mix" data-department = "' . $dept . '" >';
+	$option .= '<a href="' . get_page_link( $page->ID ) . '">';
+	$option .= $page->post_title;
+	$option .= '</a></li>';
+	$oldD = $dept;
+	unset( $myDept );
+	echo $option;
+}
+?>
  </ul>
 <hr >
 
 				<?php
-					$page_s = explode("</li>",wp_list_pages('echo=0&depth=1&title_li=&sort_column=menu_order&child_of=515'));
-					$page_n = count($page_s) - 1;
-					$page_col = round($page_n / 2);
-					for ($i=0;$i<$page_n;$i++){
-						 if ($i<$page_col){
-							$page_left = $page_left.''.$page_s[$i].'</li>';
-						 } elseif ($i>=$page_col){
-							$page_right = $page_right.''.$page_s[$i].'</li>';
-						}
-					}
-				?>
-					<ul class="left people">
-						<?php
-						 $stdepartmentTaxo = wp_get_object_terms($post->ID, 'departments');
-if(!empty($stdepartmentTaxo)){
-  if(!is_wp_error( $stdepartmentTaxo )){
-   	$myDept =  $stdepartmentTaxo[0] ->name ;
-  //  foreach($product_terms as $term){
-    	//echo '<a href="'.get_term_link($term->slug, 'departments').'">'.$term->name.'</a>'; 
-   // }
- 
-  }
+$page_s = explode( "</li>", wp_list_pages( 'echo=0&depth=1&title_li=&sort_column=menu_order&child_of=515' ) );
+$page_n = count( $page_s ) - 1;
+$page_col = round( $page_n / 2 );
+for ( $i=0;$i<$page_n;$i++ ) {
+	if ( $i<$page_col ) {
+		$page_left = $page_left.''.$page_s[$i].'</li>';
+	} elseif ( $i>=$page_col ) {
+		$page_right = $page_right.''.$page_s[$i].'</li>';
+	}
 }
-
 ?>
+					<ul class="left people">
 <?php echo $page_left; ?>
 					</ul>
 					<ul class="right people">
@@ -100,7 +113,7 @@ if(!empty($stdepartmentTaxo)){
 						Visiting Researchers
 					</h2>
 					<ul class="people">
-					<?php wp_list_pages('depth=1&title_li=&sort_column=menu_order&child_of=2000&link_before=<span>' . __('Poetry') . '</span>'); // display the sub pages of the current page only ?>
+					<?php wp_list_pages( 'depth=1&title_li=&sort_column=menu_order&child_of=2000&link_before=<span>' . __( 'Poetry' ) . '</span>' ); // display the sub pages of the current page only ?>
 					</ul>
 				</div>
 				<div class="projectborder">
@@ -108,25 +121,25 @@ if(!empty($stdepartmentTaxo)){
 						Past Researchers
 					</h2>
 						<?php
-					$page_s = explode("</li>",wp_list_pages('echo=0&depth=1&title_li=&sort_column=menu_order&child_of=597'));
-					$page_n = count($page_s) - 1;
-					$page_col = round($page_n / 2);
-					for ($i=0;$i<$page_n;$i++){
-						 if ($i<$page_col){
-							$page_left = $page_left.''.$page_s[$i].'</li>';
-						 } elseif ($i>=$page_col){
-							$page_right = $page_right.''.$page_s[$i].'</li>';
-						}
-					}
-				?>
+$page_s = explode( "</li>", wp_list_pages( 'echo=0&depth=1&title_li=&sort_column=menu_order&child_of=597' ) );
+$page_n = count( $page_s ) - 1;
+$page_col = round( $page_n / 2 );
+for ( $i=0;$i<$page_n;$i++ ) {
+	if ( $i<$page_col ) {
+		$page_left = $page_left.''.$page_s[$i].'</li>';
+	} elseif ( $i>=$page_col ) {
+		$page_right = $page_right.''.$page_s[$i].'</li>';
+	}
+}
+?>
 					<ul class="left people">
 <?php echo $page_left; ?>
 					</ul>
 					<ul class="right people">
 <?php echo $page_right; ?>
 					</ul>
-					
-		
+
+
 	</div>
 	<h2 class="entry-title">&nbsp;</h2>
 <?php edit_post_link( __( 'Edit', 'sandbox' ), '<span class="edit-link">', '</span>' ) ?>
@@ -137,4 +150,6 @@ if(!empty($stdepartmentTaxo)){
 <!-- #content -->
 </div>
 <!-- #container -->
+
+
 <?php get_footer() ?>

@@ -510,9 +510,10 @@ add_filter( 'archive_meta', 'wpautop' );
 $themedir = get_template_directory_uri();
 wp_enqueue_style('nml', $themedir . '/css/nml.css');
 //wp_enqueue_script('rollovers', $themedir . '/js/jq.js');
-wp_enqueue_script('jq', $themedir . '/js/jquery.min.js');
-wp_enqueue_script('jq-mix', $themedir . '/js/jquery.mixitup.min.js');
+wp_enqueue_script('jq', $themedir . '/js/jquery.min.js', '1.6');
+wp_enqueue_script('jq-mix', $themedir . '/js/jquery.mixitup.min.js', array('jq'), '1.6');
 wp_enqueue_script('responnav', $themedir . '/js/tinynav.min.js');
+wp_enqueue_script('nml', $themedir . '/js/nml.js', array('jq','jq-mix'), '1.5', true);
 
 // LMH define custom taxonomy
 function departments_init() {
