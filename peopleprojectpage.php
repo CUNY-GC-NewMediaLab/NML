@@ -36,36 +36,34 @@ Template Name: People Root Page
 </ul>
 				</div>
 				<div class="projectborder">
-					<h2 class="entry-title">Graduate Students and Faculty</h2>
-				
-<ul class="sortbyOptions">
-	<li id="byDept1" class="sort" data-sort="data-department" data-order="desc">Department</li>
-	<li id="byAlpha1" class="sort active" data-sort="default" data-order="desc">Default</li>
-</ul>
-
+					<select class="sortbyOptions" style="float:right; margin-bottom:-15px">
+						<option id="byAlpha1"  value="name" >View by name</li>
+						<option id="byDept1"  value="data-department" >View by department</li>
+					</select>
+	<h2 class="entry-title">Graduate Students and Faculty</h2>
 <ul id = "peopleList1">
 <?php
 $pages = get_pages( 'echo=0&depth=1&title_li=&sort_column=menu_order&child_of=515' );
-$oldD = '';
-foreach ( $pages as $page ) {
-	// taxonomy-level department
-	$stdepartmentTaxo = wp_get_object_terms( $page->ID, 'departments' );
 
-	if ( !empty( $stdepartmentTaxo ) ) {
-		if ( !is_wp_error( $stdepartmentTaxo ) ) {
-			$myDept =  $stdepartmentTaxo[0] ->name ;
+foreach ( $pages as $i=>$page ) {
+	$departmentTaxo = wp_get_object_terms( $page->ID, 'departments' );
+	if ( !empty( $departmentTaxo ) ) {
+		if ( !is_wp_error( $departmentTaxo ) ) {
+			$myDept =  $departmentTaxo[0] ->name ;
 		}
 	}
 	$option = '';
-	$dept = ( isset( $myDept ) ) ? $myDept : 'Cryptozoology';
-	if ($oldD != $dept) {
-		$option .= "<li class='headerLi' style='display:block' data-department ='" .  $dept   . "'><span>$dept</span></li>";
+	if ( !isset( $myDept ) ) {
+		$x =  get_post_meta( $page->ID, 'stdepartment', false );
+		wp_set_post_terms(  $page->ID, $x[0] , 'departments' );
+		$myDept = $x[0] ;
 	}
-	$option .= '<li  data-department = "' . $dept . '" >';
+	$dept = ( isset( $myDept ) ) ? $myDept : '';
+	$option .= '<li  data-department = "' . $dept . '" data-rank= "' . $i . '">';
 	$option .= '<a href="' . get_page_link( $page->ID ) . '">';
 	$option .= $page->post_title;
 	$option .= '</a></li>';
-	$oldD = $dept;
+	unset( $dept );
 	unset( $myDept );
 	echo $option;
 }
@@ -97,7 +95,7 @@ for ( $i=0;$i<$page_n;$i++ ) {
 						Visiting Researchers
 					</h2>
 					<ul class="people">
-					<?php wp_list_pages( 'depth=1&title_li=&sort_column=menu_order&child_of=2000&link_before=<span>' . __( 'Poetry' ) . '</span>' ); // display the sub pages of the current page only ?>
+					<?php wp_list_pages( 'depth=1&title_li=&sort_column=menu_order&child_of=2000' ); // display the sub pages of the current page only ?>
 					</ul>
 				</div>
 				<div class="projectborder">

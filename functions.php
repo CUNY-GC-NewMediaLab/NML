@@ -548,6 +548,8 @@ function departments_init() {
 		)
 	);
 }
-add_action( 'init', 'departments_init' );
+if (!taxonomy_exists('departments')){
+	add_action( 'init', 'departments_init' );
+}
 
 ?>

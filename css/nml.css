@@ -88,9 +88,18 @@ div.entry-content.peoplepage h2 {
 	clear: both;
 }
 div.entry-content.peoplepage ul {
-	
-	padding	: 10px 0 15px 15px;
-	}
+	list-style-position: inside;
+	padding	: 10px 0 15px 0px;
+}
+div.entry-content.peoplepage ul>li {
+	list-style-position: inside;
+	padding	: 0px 0 0px 5px;
+}
+div.entry-content.peoplepage ul#peopleList1>li.headerLi {
+	list-style-type: none;
+	padding	: 15px 0 5px 0px;
+	font-weight: bold;
+}
 div.entry-content.peoplepage ul.left {
 	width:  45%;
 	float: left;
@@ -281,9 +290,4 @@ img.picon {
 p.wp-caption-text {font: 75%/85%; color: #aaa; margin-top: 2px; font-style: italic; }
 
 /*  */
-ul#Grid .mix{
-	background-color: yellow;
-   /* opacity: 0;
-    display: none;*/
-}
 
