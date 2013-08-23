@@ -90,15 +90,30 @@ div.entry-content.peoplepage h2 {
 div.entry-content.peoplepage ul {
 	list-style-position: inside;
 	padding	: 10px 0 15px 0px;
+	overflow: hidden;
+	width:100%;
 }
 div.entry-content.peoplepage ul>li {
 	list-style-position: inside;
-	padding	: 0px 0 0px 5px;
+	padding	: 0px 0 0px 0px;
+	
+	
 }
+div.entry-content.peoplepage ul>li.floatme {
+	float: left;
+	width: 50%;
+}
+
 div.entry-content.peoplepage ul#peopleList1>li.headerLi {
 	list-style-type: none;
-	padding	: 15px 0 5px 0px;
+	padding	: 10px 0 0px 0px;
+	margin:0 0 10px 0;
 	font-weight: bold;
+	float: none;
+	clear: both;
+	width: 100%;
+	
+	/*background-color: blue;*/
 }
 div.entry-content.peoplepage ul.left {
 	width:  45%;

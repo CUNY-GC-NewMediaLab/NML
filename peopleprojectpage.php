@@ -40,12 +40,17 @@ Template Name: People Root Page
 						<option id="byAlpha1"  value="name" >View by name</li>
 						<option id="byDept1"  value="data-department" >View by department</li>
 					</select>
+					<div class="chooseToggle">
+					<a id="byAlpha1"  data-value="name" >viewing by name</a> |</li>
+						<a id="byDept1"  data-value="data-department" >view by department</a></li>
+					</div>
 	<h2 class="entry-title">Graduate Students and Faculty</h2>
 <ul id = "peopleList1">
 <?php
 $pages = get_pages( 'echo=0&depth=1&title_li=&sort_column=menu_order&child_of=515' );
-
+//$page_col = round( count($pages ) / 2 );
 foreach ( $pages as $i=>$page ) {
+	
 	$departmentTaxo = wp_get_object_terms( $page->ID, 'departments' );
 	if ( !empty( $departmentTaxo ) ) {
 		if ( !is_wp_error( $departmentTaxo ) ) {
@@ -59,7 +64,12 @@ foreach ( $pages as $i=>$page ) {
 		$myDept = $x[0] ;
 	}
 	$dept = ( isset( $myDept ) ) ? $myDept : '';
-	$option .= '<li  data-department = "' . $dept . '" data-rank= "' . $i . '">';
+	//if ( $i<$page_col ) {
+		$option .= '<li  class="floatme" data-department = "' . $dept . '" data-rank= "' . $i . '">';
+	//} else {
+	//	$option .= '<li  class="pageright"  data-department = "' . $dept . '" data-rank= "' . $i . '">';
+	//}
+	//$option .= '<li  data-department = "' . $dept . '" data-rank= "' . $i . '">';
 	$option .= '<a href="' . get_page_link( $page->ID ) . '">';
 	$option .= $page->post_title;
 	$option .= '</a></li>';
@@ -69,26 +79,7 @@ foreach ( $pages as $i=>$page ) {
 }
 ?>
  </ul>
-<hr >
 
-				<?php
-$page_s = explode( "</li>", wp_list_pages( 'echo=0&depth=1&title_li=&sort_column=menu_order&child_of=515' ) );
-$page_n = count( $page_s ) - 1;
-$page_col = round( $page_n / 2 );
-for ( $i=0;$i<$page_n;$i++ ) {
-	if ( $i<$page_col ) {
-		$page_left = $page_left.''.$page_s[$i].'</li>';
-	} elseif ( $i>=$page_col ) {
-		$page_right = $page_right.''.$page_s[$i].'</li>';
-	}
-}
-?>
-					<ul class="left people">
-<?php echo $page_left; ?>
-					</ul>
-					<ul class="right people">
-<?php echo $page_right; ?>
-					</ul>
 				</div>
 				<div class="projectborder">
 					<h2 class="entry-title">
