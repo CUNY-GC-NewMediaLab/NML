@@ -1,3 +1,6 @@
+/* @override 
+	http://lw4.gc.cuny.edu/_dev_nml/wp-content/themes/NMLResponsiveV2013/css/nml.css?ver=3.6 */
+
 /* styles for desktop */
 .tinynav {
     height: 37px;
@@ -92,20 +95,23 @@ button.names {
 /* people page  */
 div.entry-content.peoplepage h2 { clear: both }
 div.entry-content.peoplepage ul {
-    list-style-position: inside;
-    padding: 0px 0 0px 8px;
-    margin: 0 0 5px 0;
+    padding: 0px 0 0px 0px;
+    margin: 0 0 5px 0px;
     overflow: auto;
     width: auto;
 }
-div.entry-content.peoplepage ul>li {
-    list-style-position: inside;
-    padding: 0px 49% 0px 1%;
-    width: 49%;
+div.entry-content.peoplepage ul li {
+	display: block;
+  	background:  #fff url(../images/dot.gif) no-repeat 0px 6px;
+    padding: 0px 0 0 12px;
+    width: 49%;  
+    float: left;
+    clear: left;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
 div.entry-content.peoplepage ul>li.floatme {
     float: left;
-    padding: 0px 0 0px 1%;
+    clear: none;  
 }
 div.entry-content.peoplepage .sorterHold {
     margin-bottom: -19px;
@@ -116,24 +122,16 @@ div.entry-content.peoplepage .sorterHold  a {
     display: block;
 }
 div.entry-content.peoplepage ul#peopleList1>li.headerLi,
-div.entry-content.peoplepage ul#peopleList2>li.headerLi2 {
-    list-style-type: none;
+div.entry-content.peoplepage ul#peopleList2>li.headerLi2 { 
     padding: 10px 0 0px 0px;
     margin: 0 0 10px 0;
     font-weight: bold;
     float: none;
     clear: both;
     width: 100%;
+    background-image:none;
 }
-div.entry-content.peoplepage ul.left {
-    width: 45%;
-    float: left;
-    min-width: 100px;
-}
-div.entry-content.peoplepage ul.right {
-    width: 45%;
-    float: left;
-}
+
 div.projectborder { padding: 1em 0 1em 0 }
 h1,
 h2,
