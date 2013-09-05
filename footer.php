@@ -10,7 +10,7 @@
 </div><!-- #wrapper .hfeed -->
 
 <?php wp_footer() ?>
-<script type="text/javascript">
+<script>
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-26364179-1']);

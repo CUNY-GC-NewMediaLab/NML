@@ -1,5 +1,49 @@
 $(function() {
- 
+ 	$("#menu-primary-nav").tinyNav();
+ 	
+ 	$('.projects-landing-page .qt li>a').each(function() { 
+    	$(this).next('div').click(function(){
+     		window.location=$(this).find("a").attr("href"); 
+     		return false;
+		});
+    	$(this).qtip({
+        	content: { text: $(this).next('div')},
+    		style: {
+        		classes: 'qtip-light', tip: false
+        		},
+        	
+        	hide: {
+             fixed: true,
+             delay: 300
+         	},
+        position: {
+        		my: 'center right',  
+       			at: 'bottom right',
+       			adjust: {y: -32 },
+        		target: $(this).parent('li'), 
+        		viewport: $(this).parents('.qt'),
+        		
+        		//viewport: $(window),
+        		adjust: {
+            		method: 'shift'
+        		}
+    		},
+    		 /*	position: {
+        		my: 'top right',  
+       			at: 'top right',
+        		target: $(this).parents('.qt'), 
+        		viewport: $(window),
+        		adjust: {
+            		method: 'shift'
+        		}
+    		},*/
+    		show: {
+        		solo: true
+    		}
+    	});
+	});
+
+
     $("#sorter1").click(function() {
      	$('.headerLi').remove();
         $('ul#peopleList1>li').removeClass("floatme");
