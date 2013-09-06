@@ -75,4 +75,19 @@ function people_custom_init() {
 add_action( 'init', 'people_custom_init' );
 
 
+/**
+ * Hooks the WP cpt_post_types filter 
+ *
+ * @param array $post_types An array of post type names that the templates be used by
+ * @return array The array of post type names that the templates be used by
+ **/
+function my_cpt_post_types( $post_types ) {
+     unset($post_types);
+    $post_types[] = 'projects';
+   // $post_types[] = 'people';
+    return $post_types;
+}
+add_filter( 'cpt_post_types', 'my_cpt_post_types' );
+
+
 ?>
